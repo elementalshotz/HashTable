@@ -22,7 +22,10 @@ namespace HashTable
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+            {
+                Remove(item);
+            }
         }
 
         public bool Contains(T item)
