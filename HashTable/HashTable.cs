@@ -37,7 +37,10 @@ namespace HashTable
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            for (int i = arrayIndex; i < array.Length; i++)
+            {
+                Add(array[i]);
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
