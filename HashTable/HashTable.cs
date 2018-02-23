@@ -47,7 +47,7 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return list.GetEnumerator();
         }
     }
 }
