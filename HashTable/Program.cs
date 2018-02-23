@@ -10,6 +10,21 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
+            HashSet<int> hashSet = new HashSet<int>();
+            hashSet.Add(1);
+            hashSet.Add(2);
+            hashSet.Add(3);
+            hashSet.Add(4);
+            hashSet.Add(5);
+
+            if (hashSet.Remove(4))
+                Console.WriteLine("Object removed!");
+
+            if (!hashSet.Remove(700))
+                Console.WriteLine("Object not found!");
+
+            Console.WriteLine(hashSet.Count);
+            Console.WriteLine(hashSet.Contains(3));
         }
     }
 }

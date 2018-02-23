@@ -9,7 +9,12 @@ namespace HashTable
 {
     class HashTable<T> : ICollection<T>, IEnumerable<T>
     {
-        LinkedList<T> list = new LinkedList<T>();
+        LinkedList<T> list;
+
+        public HashTable()
+        {
+            list = new LinkedList<T>();
+        }
 
         public int Count => list.Count;
 
@@ -42,7 +47,13 @@ namespace HashTable
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            if (Contains(item) == true)
+            {
+                list.Remove(item);
+                return true;
+            }
+            return false;
+
         }
 
         IEnumerator IEnumerable.GetEnumerator()
