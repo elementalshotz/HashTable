@@ -37,9 +37,10 @@ namespace HashTable
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            for (int i = arrayIndex; i < array.Length; i++)
+            foreach (var item in list)
             {
-                Add(array[i]);
+                array[arrayIndex] = item;
+                arrayIndex++;
             }
         }
 
