@@ -11,9 +11,9 @@ namespace HashTable
     {
         T[] list;
 
-        public int Count => throw new NotImplementedException();
+        public int Count => list.Length;
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly => list.IsReadOnly;
 
         public void Add(T item)
         {
