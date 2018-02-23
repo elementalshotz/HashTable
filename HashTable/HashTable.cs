@@ -11,9 +11,9 @@ namespace HashTable
     {
         LinkedList<T> list = new LinkedList<T>();
 
-        public int Count => list.Length;
+        public int Count => list.Count;
 
-        public bool IsReadOnly => list.IsReadOnly;
+        public bool IsReadOnly => throw new NotImplementedException();
 
         public void Add(T item)
         {
