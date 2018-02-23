@@ -18,9 +18,6 @@ namespace HashTable
             hashSet.Add(4);
             hashSet.Add(5);
 
-            
-
-
             hashSet.CopyTo(hashSet2, 2);
 
             if (hashSet.Remove(4))
@@ -31,7 +28,7 @@ namespace HashTable
 
             Console.WriteLine(hashSet.Count);
             Console.WriteLine(hashSet.Contains(3));
-            Console.WriteLine(hashSet2.ElementAt(1));
+            Console.WriteLine(hashSet2.ElementAt(4));
         }
     }
 }
