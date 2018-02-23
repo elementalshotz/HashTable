@@ -9,7 +9,7 @@ namespace HashTable
 {
     class HashTable<T> : ICollection<T>, IEnumerable<T>
     {
-        T[] list;
+        LinkedList<T> list = new LinkedList<T>();
 
         public int Count => list.Length;
 
@@ -17,20 +17,17 @@ namespace HashTable
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            list.AddFirst(item);
         }
 
         public void Clear()
         {
-            foreach (var item in list)
-            {
-                Remove(item);
-            }
+            list.Clear();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return list.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -40,7 +37,7 @@ namespace HashTable
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return list.GetEnumerator();
         }
 
         public bool Remove(T item)
