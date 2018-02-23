@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class HashDictionary<T> : ICollection<T>, IEnumerable<T>
+    class HashTable<T> : ICollection<T>, IEnumerable<T>
     {
         public int Count => throw new NotImplementedException();
 
