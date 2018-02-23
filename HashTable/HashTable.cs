@@ -9,7 +9,14 @@ namespace HashTable
 {
     class HashTable<T> : ICollection<T>, IEnumerable<T>
     {
-        T[] list;
+        LinkedList<T>[] list;
+        int Size;
+
+        public HashTable(int size)
+        {
+            Size = size;
+            list = new LinkedList<T>[Size];
+        }
 
         public int Count => list.Length;
 
@@ -50,7 +57,12 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
