@@ -22,16 +22,15 @@ namespace HashTable
 
         public void Clear()
         {
-            
+            foreach (var item in list)
+            {
+                Remove(item);
+            }
         }
 
         public bool Contains(T item)
         {
-            foreach (var t_item in list)
-                if (t_item.Equals(item))
-                    return true;
-
-            return false;
+            throw new NotImplementedException();
         }
 
         public void CopyTo(T[] array, int arrayIndex)
