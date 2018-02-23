@@ -9,6 +9,8 @@ namespace HashTable
 {
     class HashTable<T> : ICollection<T>, IEnumerable<T>
     {
+        T[] list;
+
         public int Count => throw new NotImplementedException();
 
         public bool IsReadOnly => throw new NotImplementedException();
