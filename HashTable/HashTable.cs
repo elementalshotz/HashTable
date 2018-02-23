@@ -62,7 +62,7 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return list.GetEnumerator();
+            return (IEnumerator) list.GetEnumerator();
         }
     }
 }
