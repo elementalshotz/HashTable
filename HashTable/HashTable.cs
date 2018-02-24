@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class HashTable<T> : ICollection<T>, IEnumerable<T>
+    class HashTable<V> : ICollection<V>, IEnumerable<V>
     {
-        LinkedList<T> list;
+        LinkedList<V> list;
 
         public HashTable()
         {
-            list = new LinkedList<T>();
+            list = new LinkedList<V>();
         }
 
         public int Count => list.Count;
 
         public bool IsReadOnly => throw new NotImplementedException();
 
-        public void Add(T item)
+        public void Add(V item)
         {
             list.AddFirst(item);
         }
@@ -30,12 +30,12 @@ namespace HashTable
             list.Clear();
         }
 
-        public bool Contains(T item)
+        public bool Contains(V item)
         {
             return list.Contains(item);
         }
 
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(V[] array, int arrayIndex)
         {
             foreach (var item in list)
             {
@@ -44,12 +44,12 @@ namespace HashTable
             }
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<V> GetEnumerator()
         {
             return list.GetEnumerator();
         }
 
-        public bool Remove(T item)
+        public bool Remove(V item)
         {
             if (Contains(item) == true)
             {
