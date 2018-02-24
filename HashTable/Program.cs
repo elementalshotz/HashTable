@@ -18,6 +18,10 @@ namespace HashTable
             hashSet.Add(4);
             hashSet.Add(5);
 
+            Tuple<string, double, double, int> tuple = new Tuple<string,double,double,int>("Tjenna",10.5,20.5,10);
+
+            Console.WriteLine(tuple.GetHashCode());
+
             hashSet.CopyTo(hashSet2, 2);
 
             if (hashSet.Remove(4))

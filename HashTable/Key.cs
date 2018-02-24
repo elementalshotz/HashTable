@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class Key 
+    class Key
     {
-        float longitude;
-        float latitude;
+        private double Long;
+        private double Lat;
 
-        public Key(float lon, float lat)
+        public Key(double longitude, double lat)
         {
-            longitude = lon;
-            latitude = lat;
+            this.Long = longitude;
+            this.Lat = lat;
+        }
+
+        public override int GetHashCode()
+        {
+            return Tuple.Create(Long, Lat).GetHashCode();
         }
     }
 }
