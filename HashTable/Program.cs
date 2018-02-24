@@ -10,13 +10,13 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            HashSet<int> hashSet = new HashSet<int>();
-            int[] hashSet2 = new int[10];
-            hashSet.Add(1);
-            hashSet.Add(2);
-            hashSet.Add(3);
-            hashSet.Add(4);
-            hashSet.Add(5);
+            HashSet<Value<string, float, float, int>> hashSet = new HashSet<Value<string, float, float, int>>();
+            Value<string, float, float, int>[] hashSet2 = new Value<string, float, float, int>[10];
+            hashSet.Add(new Value<string, float, float, int>("", (float)10.5, (float)20.5, 500));
+            hashSet.Add(new Value<string, float, float, int>("", (float)10.5, (float)20.5, 500));
+            hashSet.Add(new Value<string, float, float, int>("", (float)10.5, (float)20.5, 500));
+            hashSet.Add(new Value<string, float, float, int>("", (float)10.5, (float)20.5, 500));
+            hashSet.Add(new Value<string, float, float, int>("", (float)10.5, (float)20.5, 500));
 
             Tuple<string, double, double, int> tuple = new Tuple<string,double,double,int>("Tjenna",10.5,20.5,10);
 
