@@ -8,6 +8,13 @@ namespace HashTable
 {
     class Key 
     {
-       
+        float longitude;
+        float latitude;
+
+        public Key(float lon, float lat)
+        {
+            longitude = lon;
+            latitude = lat;
+        }
     }
 }
