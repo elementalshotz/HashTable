@@ -8,10 +8,10 @@ namespace HashTable
 {
     class Key
     {
-        private double Long;
-        private double Lat;
+        private float Long;
+        private float Lat;
 
-        public Key(double longitude, double lat)
+        public Key(float longitude, float lat)
         {
             this.Long = longitude;
             this.Lat = lat;
