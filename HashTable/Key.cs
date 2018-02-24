@@ -17,9 +17,6 @@ namespace HashTable
             this.Lat = latitude;
         }
 
-        public override int GetHashCode()
-        {
-            return Tuple.Create(Long, Lat).GetHashCode();
-        }
+        public override int GetHashCode() =>  Tuple.Create(Long, Lat).GetHashCode();
     }
 }

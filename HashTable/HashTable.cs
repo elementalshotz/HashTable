@@ -18,27 +18,15 @@ namespace HashTable
 
         public int Count => list.Count;
 
-        public bool IsReadOnly => FIsReadOnly(list.ToArray());
+        public bool IsReadOnly => FIsReadOnly(list.ToList().AsReadOnly().ToArray());
 
-        bool FIsReadOnly(V[] checkList)
-        {
-            return checkList.IsReadOnly;
-        }
+        bool FIsReadOnly(V[] checkList) => checkList.IsReadOnly;
 
-        public void Add(V item)
-        {
-            list.AddFirst(item);
-        }
+        public void Add(V item) => list.AddFirst(item);
 
-        public void Clear()
-        {
-            list.Clear();
-        }
+        public void Clear() => list.Clear();
 
-        public bool Contains(V item)
-        {
-            return list.Contains(item);
-        }
+        public bool Contains(V item) => list.Contains(item);
 
         public void CopyTo(V[] array, int arrayIndex)
         {
@@ -49,10 +37,7 @@ namespace HashTable
             }
         }
 
-        public IEnumerator<V> GetEnumerator()
-        {
-            return list.GetEnumerator();
-        }
+        public IEnumerator<V> GetEnumerator() => list.GetEnumerator();
 
         public bool Remove(V item)
         {
@@ -65,9 +50,6 @@ namespace HashTable
 
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return (IEnumerator) list.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => (IEnumerator) list.GetEnumerator();
     }
 }

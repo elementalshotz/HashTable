@@ -26,14 +26,14 @@ namespace HashTable
 
             Console.WriteLine($"IsReadOnly {hashSet.IsReadOnly}");
 
-            if (hashSet.Remove(hashSet2.ElementAt(0)))
+            if (hashSet.Remove(hashSet2.ElementAt(1)))
                 Console.WriteLine("Object removed!");
 
-            if (!hashSet.Remove(new Value<string, double, double, int>("Rio das Ostras", -22.52694, -41.945, 100000)))
+            if (!hashSet.Remove(hashSet2.ElementAt(1)))
                 Console.WriteLine("Object not found!");
 
             Console.WriteLine(hashSet.Count);
-            Console.WriteLine(hashSet.Contains(new Value<string, double, double, int>("Tokyo", 35.6895, 139.69171, 8336599)));
+            Console.WriteLine(hashSet.Contains(hashSet2.ElementAt(3)));
             Console.WriteLine(hashSet2.ElementAt(3).Tuple.ToString());
             Console.WriteLine(hashSet2.ElementAt(4).Tuple.ToString());
         }

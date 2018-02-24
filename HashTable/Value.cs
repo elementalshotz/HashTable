@@ -10,15 +10,9 @@ namespace HashTable
     {
         Tuple<C, L, A, P> tuple;
 
-        public Value(C c, L l, A a, P p)
-        {
-            tuple = new Tuple<C, L, A, P>(c, l, a, p);
-        }
+        public Value(C c, L l, A a, P p) => tuple = new Tuple<C, L, A, P>(c, l, a, p);
 
-        public Tuple<C, L, A, P> Tuple
-        {
-            get => tuple;
-        }
+        public Tuple<C, L, A, P> Tuple => tuple;
 
         public void update(C c) => update(c, tuple.Item2, tuple.Item3, tuple.Item4);
 
