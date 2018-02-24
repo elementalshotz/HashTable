@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class Value<C, L, A, T>
+    class Value<C, L, A, P>
     {
-        Tuple<C, L, A, T> tuple;
+        Tuple<C, L, A, P> tuple;
 
-        public Value(C c, L l, A a, T t)
+        public Value(C c, L l, A a, P p)
         {
-            tuple = new Tuple<C, L, A, T>(c, l, a, t);
+            tuple = new Tuple<C, L, A, P>(c, l, a, p);
         }
 
-        public Tuple<C, L, A, T> Tuple
+        public Tuple<C, L, A, P> Tuple
         {
             get => tuple;
         }
