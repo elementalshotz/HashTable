@@ -11,10 +11,10 @@ namespace HashTable
         private float Long;
         private float Lat;
 
-        public Key(float longitude, float lat)
+        public Key(float longitude, float latitude)
         {
             this.Long = longitude;
-            this.Lat = lat;
+            this.Lat = latitude;
         }
 
         public override int GetHashCode()
