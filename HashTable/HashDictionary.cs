@@ -9,11 +9,18 @@ namespace HashTable
 {
     class HashDictionary<K, V> : IDictionary<K, V>
     {
-        private HashDictionary<K, V> hashDictionary = new HashDictionary<K, V>();
+        Dictionary<K, V> hashDictionary;
+
+        public HashDictionary()
+        {
+            hashDictionary = new Dictionary<K, V>();
+        }
+
+
 
         IEnumerator IEnumerable.GetEnumerator() => (IEnumerator) hashDictionary.GetEnumerator();
 
-        public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item);
+        public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item.Key,item.Value);
 
         public void Clear() => hashDictionary.Clear();
 
@@ -28,10 +35,11 @@ namespace HashTable
             }
         }
 
-        public bool Remove(KeyValuePair<K, V> item) =>hashDictionary.Remove(item);
+        public bool Remove(KeyValuePair<K, V> item) =>hashDictionary.Remove(item.Key);
 
         public int Count { get { return hashDictionary.Count; } }
-        public bool IsReadOnly { get { return hashDictionary.IsReadOnly; } }
+        public bool IsReadOnly { get; }
+
 
         public bool ContainsKey(K key) => hashDictionary.ContainsKey(key);
 
