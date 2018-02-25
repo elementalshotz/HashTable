@@ -13,12 +13,12 @@ namespace HashTable
 
         public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return hashDictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return (IEnumerator) hashDictionary.GetEnumerator();
         }
 
         public void Add(KeyValuePair<K, V> item)
