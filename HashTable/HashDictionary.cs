@@ -15,7 +15,7 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator) GetEnumerator();
+            return (IEnumerator) hashDictionary.GetEnumerator();
         }
 
         public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item);
