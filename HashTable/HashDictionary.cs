@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class HashDictionary<K,V> : IDictionary<K, V>
+    class HashDictionary<K, V> : IDictionary<K, V>
     {
         private HashDictionary<K, V> hashDictionary = new HashDictionary<K, V>();
 
-        public IEnumerator<KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return (IEnumerator) hashDictionary.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => (IEnumerator) hashDictionary.GetEnumerator();
 
         public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item);
 
@@ -31,10 +26,9 @@ namespace HashTable
                 array[arrayIndex] = item;
                 arrayIndex++;
             }
-
         }
 
-        public bool Remove(KeyValuePair<K, V> item) => hashDictionary.Remove(item);
+        public bool Remove(KeyValuePair<K, V> item) =>hashDictionary.Remove(item);
 
         public int Count { get { return hashDictionary.Count; } }
         public bool IsReadOnly { get { return hashDictionary.IsReadOnly; } }
