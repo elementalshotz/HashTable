@@ -76,8 +76,8 @@ namespace HashTable
 
         public V this[K key]
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => hashDictionary[key];
+            set => hashDictionary[key] = value;
         }
 
         public ICollection<K> Keys { get; }
