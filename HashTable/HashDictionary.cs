@@ -11,30 +11,18 @@ namespace HashTable
     {
         private HashDictionary<K, V> hashDictionary = new HashDictionary<K, V>();
 
-        public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
-        {
-            return hashDictionary.GetEnumerator();
-        }
+        public IEnumerator<KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return (IEnumerator) GetEnumerator();
         }
 
-        public void Add(KeyValuePair<K, V> item)
-        {
-            hashDictionary.Add(item);
-        }
+        public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item);
 
-        public void Clear()
-        {
-            hashDictionary.Clear();
-        }
+        public void Clear() => hashDictionary.Clear();
 
-        public bool Contains(KeyValuePair<K, V> item)
-        {
-            return hashDictionary.Contains(item);
-        }
+        public bool Contains(KeyValuePair<K, V> item) => hashDictionary.Contains(item);
 
         public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
         {
@@ -46,10 +34,7 @@ namespace HashTable
 
         }
 
-        public bool Remove(KeyValuePair<K, V> item)
-        {
-            return hashDictionary.Remove(item);
-        }
+        public bool Remove(KeyValuePair<K, V> item) => hashDictionary.Remove(item);
 
         public int Count { get; }
         public bool IsReadOnly { get; }
@@ -59,20 +44,11 @@ namespace HashTable
             return hashDictionary.ContainsKey(key);
         }
 
-        public void Add(K key, V value)
-        {
-            hashDictionary.Add(key,value);
-        }
+        public void Add(K key, V value) => hashDictionary.Add(key,value);
 
-        public bool Remove(K key)
-        {
-            return hashDictionary.Remove(key);
-        }
+        public bool Remove(K key) => hashDictionary.Remove(key);
 
-        public bool TryGetValue(K key, out V value)
-        {
-            return hashDictionary.TryGetValue(key, out value);
-        }
+        public bool TryGetValue(K key, out V value) => hashDictionary.TryGetValue(key, out value);
 
         public V this[K key]
         {
