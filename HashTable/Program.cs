@@ -15,6 +15,7 @@ namespace HashTable
 
             foreach (var city in cities)
             {
+                string[] city_info;
             }
         }
     }
