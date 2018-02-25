@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class Key
+    class Key<K>
     {
-        private float Long;
-        private float Lat;
+        private K Long;
+        private K Lat;
 
-        public Key(float longitude, float latitude)
+        public Key(K longitude, K latitude)
         {
             this.Long = longitude;
             this.Lat = latitude;

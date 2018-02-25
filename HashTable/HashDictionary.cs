@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class HashDictionary<K,V> : IDictionary<K,V>
+    class HashDictionary<K,V> where K : Key<K>, IDictionary<K, V>
     {
         private HashDictionary<K, V> hashDictionary = new HashDictionary<K, V>();
 
