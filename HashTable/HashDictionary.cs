@@ -11,10 +11,7 @@ namespace HashTable
     {
         Dictionary<K, V> hashDictionary;
 
-        public HashDictionary()
-        {
-            hashDictionary = new Dictionary<K, V>();
-        }
+        public HashDictionary() => hashDictionary = new Dictionary<K, V>();
 
         IEnumerator IEnumerable.GetEnumerator() => (IEnumerator)hashDictionary.GetEnumerator();
 
