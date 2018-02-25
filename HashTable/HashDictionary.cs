@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class HashDictionary<K,V> where K : Key<K>, IDictionary<K, V>
+    class HashDictionary<K, V> : IDictionary<K, V>
     {
-        private HashDictionary<K, V> hashDictionary = new HashDictionary<K, V>();
+        private HashDictionary<K, V> hashDictionary;
+
+        public HashDictionary() {
+            hashDictionary = new HashDictionary<K, V>();
+        }
 
         public IEnumerator<KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
 
@@ -36,13 +40,10 @@ namespace HashTable
 
         public bool Remove(KeyValuePair<K, V> item) => hashDictionary.Remove(item);
 
-        public int Count { get; }
-        public bool IsReadOnly { get; }
+        public int Count { get { return hashDictionary.Count; } }
+        public bool IsReadOnly { get { return hashDictionary.IsReadOnly; } }
 
-        public bool ContainsKey(K key)
-        {
-            return hashDictionary.ContainsKey(key);
-        }
+        public bool ContainsKey(K key) => hashDictionary.ContainsKey(key);
 
         public void Add(K key, V value) => hashDictionary.Add(key,value);
 
