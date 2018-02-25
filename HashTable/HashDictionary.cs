@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class HashDictionary<K,V> where K : Key<K>, IDictionary<K, V>
+    class HashDictionary<K,V> : IDictionary<K, V>
     {
         private HashDictionary<K, V> hashDictionary = new HashDictionary<K, V>();
 
@@ -18,7 +18,7 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator) hashDictionary.GetEnumerator();
+            return hashDictionary.GetEnumerator();
         }
 
         public void Add(KeyValuePair<K, V> item)
@@ -82,5 +82,6 @@ namespace HashTable
 
     public ICollection<K> Keys { get; }
     public ICollection<V> Values { get; }
+       
     }
 }
