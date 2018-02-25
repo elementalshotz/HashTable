@@ -17,6 +17,9 @@ namespace HashTable
             hashSet.Add(new Value<string, double, double, int>("New York City", 40.71427, -74.00597, 8175133));
             hashSet.Add(new Value<string, double, double, int>("Tokyo", 35.6895, 139.69171, 8336599));
             hashSet.Add(new Value<string, double, double, int>("Shanghai", 31.22222, 121.45806, 22315474));
+            
+            Console.WriteLine(hashSet.ElementAt(2).Tuple.ToString());
+            hashSet.ElementAt(2).update(8175134);
 
             Tuple<string, double, double, int> tuple = new Tuple<string,double,double,int>("Tjenna",10.5,20.5,10);
 
