@@ -16,15 +16,15 @@ namespace HashTable
             hashDictionary = new Dictionary<K, V>();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => (IEnumerator) hashDictionary.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => (IEnumerator)hashDictionary.GetEnumerator();
 
-        public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item.Key,item.Value);
+        public void Add(System.Collections.Generic.KeyValuePair<K, V> item) => hashDictionary.Add(item.Key, item.Value);
 
         public void Clear() => hashDictionary.Clear();
 
-        public bool Contains(KeyValuePair<K, V> item) => hashDictionary.Contains(item);
+        public bool Contains(System.Collections.Generic.KeyValuePair<K, V> item) => hashDictionary.Contains(item);
 
-        public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
+        public void CopyTo(System.Collections.Generic.KeyValuePair<K, V>[] array, int arrayIndex)
         {
             foreach (var item in hashDictionary)
             {
@@ -33,20 +33,20 @@ namespace HashTable
             }
         }
 
-        public bool Remove(KeyValuePair<K, V> item) =>hashDictionary.Remove(item.Key);
+        public bool Remove(System.Collections.Generic.KeyValuePair<K, V> item) => hashDictionary.Remove(item.Key);
 
         public int Count { get { return hashDictionary.Count; } }
         public bool IsReadOnly { get; }
 
         public bool ContainsKey(K key) => hashDictionary.ContainsKey(key);
 
-        public void Add(K key, V value) => hashDictionary.Add(key,value);
+        public void Add(K key, V value) => hashDictionary.Add(key, value);
 
         public bool Remove(K key) => hashDictionary.Remove(key);
 
         public bool TryGetValue(K key, out V value) => hashDictionary.TryGetValue(key, out value);
 
-        public IEnumerator<KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
+        public IEnumerator<System.Collections.Generic.KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
 
         public V this[K key]
         {

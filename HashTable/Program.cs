@@ -12,13 +12,13 @@ namespace HashTable
         {
             string[] cities = System.IO.File.ReadAllLines("cities100000.txt");
             HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>();
-            KeyValuePair<GeoLocation<double>, City> key = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10,10), new City("Tjenarey", 10,10,500000));
+            System.Collections.Generic.KeyValuePair<GeoLocation<double>, City> key = new System.Collections.Generic.KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10,10), new City("Tjenarey", 10,10,500000));
 
             foreach (var city in cities)
             {
                 string[] city_info = city.Split('\t');
 
-                hashDictionary.Add(new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2])), new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]))));
+                hashDictionary.Add(new System.Collections.Generic.KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2])), new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]))));
             }
 
             hashDictionary.Add(key);
