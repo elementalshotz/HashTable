@@ -18,9 +18,7 @@ namespace HashTable
 
         public int Count => list.Count;
 
-        public bool IsReadOnly => FIsReadOnly(list.ToList().AsReadOnly().ToArray());
-
-        bool FIsReadOnly(V[] checkList) => checkList.IsReadOnly;
+        public bool IsReadOnly { get; }
 
         public void Add(V item) => list.AddFirst(item);
 
