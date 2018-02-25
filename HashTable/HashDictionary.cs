@@ -41,6 +41,8 @@ namespace HashTable
 
         public bool TryGetValue(K key, out V value) => hashDictionary.TryGetValue(key, out value);
 
+        public IEnumerator<KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
+
         public V this[K key]
         {
             get => hashDictionary[key];
