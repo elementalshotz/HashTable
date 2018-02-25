@@ -13,7 +13,7 @@ namespace HashTable
 
         public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return hashDictionary.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
