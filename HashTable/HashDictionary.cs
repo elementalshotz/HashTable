@@ -16,8 +16,6 @@ namespace HashTable
             hashDictionary = new Dictionary<K, V>();
         }
 
-
-
         IEnumerator IEnumerable.GetEnumerator() => (IEnumerator) hashDictionary.GetEnumerator();
 
         public void Add(KeyValuePair<K, V> item) => hashDictionary.Add(item.Key,item.Value);
@@ -39,7 +37,6 @@ namespace HashTable
 
         public int Count { get { return hashDictionary.Count; } }
         public bool IsReadOnly { get; }
-
 
         public bool ContainsKey(K key) => hashDictionary.ContainsKey(key);
 
