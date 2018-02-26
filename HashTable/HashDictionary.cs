@@ -17,11 +17,7 @@ namespace HashTable
             Size = size;
         }
 
-        private int HashKey(K key)
-        {
-            var hash = Math.Abs(key.GetHashCode()) % this.Size;
-            return hash;
-        }
+        private int HashKey(K key) => Math.Abs(key.GetHashCode()) % this.Size;
 
         IEnumerator IEnumerable.GetEnumerator() {
 
@@ -162,7 +158,7 @@ namespace HashTable
                     {
                         if (item.Key.Equals(key))
                         {
-                            hashDictionary[HashIndex(key.GetHashCode())].Remove(new LinkedListNode<KeyValuePair<K, V>>(item));
+                            hashDictionary[HashKey(key)].Remove(new LinkedListNode<KeyValuePair<K, V>>(item));
                         }
                     }
                 }
@@ -195,13 +191,21 @@ namespace HashTable
 
         public V this[K key]
         {
-            get => hashDictionary[key];
-            set => hashDictionary[key] = value;
+            get
+            {
+                V v;
+                TryGetValue(key, out v);
+                return v;
+            }
+            set
+            {
+                V v;
+                TryGetValue(key, out v);
+                v = value;
+            }
         }
 
         public ICollection<K> Keys { get; }
         public ICollection<V> Values { get; }
-
-        public int HashIndex(int hash) => hash % hashDictionary.Length;
     }
 }

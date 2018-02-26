@@ -11,7 +11,7 @@ namespace HashTable
         static void Main(string[] args)
         {
             string[] cities = System.IO.File.ReadAllLines("cities100000.txt");
-            HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>();
+            HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>(10007);
             System.Collections.Generic.KeyValuePair<GeoLocation<double>, City> key = new System.Collections.Generic.KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10,10), new City("Tjenarey", 10,10,500000));
 
             foreach (var city in cities)
