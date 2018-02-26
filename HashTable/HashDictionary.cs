@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,8 @@ namespace HashTable
     class HashDictionary<K, V> : IDictionary<K, V>
     {
         LinkedList<KeyValuePair<K, V>>[] hashDictionary;
-        int Size;
+        private int Size;
+
 
         public HashDictionary(int size)
         {
@@ -15,18 +17,45 @@ namespace HashTable
             Size = size;
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
-            KeyValuePair<K,V>[] items = new KeyValuePair<K,V>[Size];
-            CopyTo(items, 0);
+        private int HashKey(K key)
+        {
+            var hash = Math.Abs(key.GetHashCode()) % this.Size;
+            return hash;
+        }
 
-            return (IEnumerator) new HashDictionaryEnumerator(items);
+        IEnumerator IEnumerable.GetEnumerator() {
+
+            return this.GetEnumerator();
+        }
+
+        public V Find(K key)
+        {
+            var hash = this.HashKey(key);
+
+            if (this.hashDictionary[hash] == null)
+            {
+                return default(V);
+            }
+
+            var collection = this.hashDictionary[hash];
+
+            return collection.First(item => item.Key.Equals(key)).Value;
         }
 
         public void Add(KeyValuePair<K, V> item)
         {
-            int index = HashIndex(item.Key.GetHashCode());
+            var hash = this.HashKey(item.Key);
 
-            hashDictionary[index].AddLast(new LinkedListNode<KeyValuePair<K, V>>(item));
+            var keyValuePair = new KeyValuePair<K, V>(item.Key,item.Value);
+
+            if (this.hashDictionary[hash] == null)
+            {
+                this.hashDictionary[hash] = new LinkedList<KeyValuePair<K, V>>();
+                this.hashDictionary[hash].AddFirst(keyValuePair);
+            }
+
+            this.hashDictionary[hash].AddLast(keyValuePair);
+            Count++;
         }
 
         public void Clear()
@@ -39,16 +68,17 @@ namespace HashTable
 
         public bool Contains(KeyValuePair<K, V> item)
         {
-            foreach (var linkedList in hashDictionary)
+            var hash = this.HashKey(item.Key);
+
+            if (this.hashDictionary[hash] == null)
             {
-                foreach (var listItem in linkedList)
-                {
-                    if (listItem.Key.Equals(item.Key))
-                        return true;
-                }
+                return false;
             }
 
-            return false;
+            var collection = this.hashDictionary[hash];
+
+            return collection.Any(pair => pair.Key.Equals(item.Key));
+
         }
 
         public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
@@ -63,38 +93,62 @@ namespace HashTable
             }
         }
 
-        public bool Remove(System.Collections.Generic.KeyValuePair<K, V> item)
+        public bool Remove(KeyValuePair<K, V> item)
         {
-            if (Contains(item))
+            var hash = this.HashKey(item.Key);
+
+            if (this.hashDictionary[hash] == null)
             {
-                int index = HashIndex(item.Key.GetHashCode());
-                hashDictionary[index].Remove(new LinkedListNode<KeyValuePair<K, V>>(item));
-                return true;
+                return false;
             }
 
-            return false;
+            var collection = this.hashDictionary[hash];
+
+            return collection.Any(pair => pair.Key.Equals(item.Key));
+
         }
 
-        public int Count { get { return hashDictionary.Length; } }
+        public int Count { get; private set; }
+
+
+
         public bool IsReadOnly { get; }
 
         public bool ContainsKey(K key)
         {
-            foreach (var linkedList in hashDictionary)
+            var hash = this.HashKey(key);
+
+            if (this.hashDictionary[hash] == null)
             {
-                foreach (var item in linkedList)
-                {
-                    if (item.Key.Equals(key))
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
 
-            return false;
+            var collection = this.hashDictionary[hash];
+
+            return collection.Any(pair => pair.Key.Equals(key));
+            
         }
 
-        public void Add(K key, V value) => hashDictionary[HashIndex(key.GetHashCode())].AddLast(new LinkedListNode<KeyValuePair<K,V>>(new KeyValuePair<K, V>(key, value)));
+        public void Add(K key, V value)
+        {
+            var hash = this.HashKey(key);
+
+            var keyValuePair = new KeyValuePair<K, V>(key, value);
+
+            if (this.hashDictionary[hash] == null)
+            {
+                this.hashDictionary[hash] = new LinkedList<KeyValuePair<K, V>>();
+                this.hashDictionary[hash].AddFirst(keyValuePair);
+            }
+
+            this.hashDictionary[hash].AddLast(keyValuePair);
+            Count++;
+
+        }
+
+        //=> hashDictionary[HashIndex(key.GetHashCode())].AddLast(new LinkedListNode<KeyValuePair<K,V>>(new KeyValuePair<K, V>(key, value)));
+
+
 
         public bool Remove(K key)
         {
@@ -121,22 +175,23 @@ namespace HashTable
 
         public bool TryGetValue(K key, out V value)
         {
-            foreach (var linkedList in hashDictionary)
+            value = Find(key); // Vet ej vad som händer om funktionen inte hittar nyckeln.
+            return true;
+        }
+
+        public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
+        {
+            foreach (var collection in this.hashDictionary)
             {
-                foreach (var item in linkedList)
+                if (collection != null)
                 {
-                    if (item.Key.Equals(key))
+                    foreach (var value in collection)
                     {
-                        value = item.Value;
-                        return true;
+                        yield return value;
                     }
                 }
             }
-
-            throw new A
         }
-
-        public IEnumerator<System.Collections.Generic.KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
 
         public V this[K key]
         {
