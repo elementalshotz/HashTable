@@ -44,9 +44,9 @@
   <ItemGroup>
     <Compile Include="City.cs" />
     <Compile Include="HashDictionary.cs" />
+    <Compile Include="HashDictionaryEnumerator.cs" />
     <Compile Include="HashTable.cs" />
     <Compile Include="GeoLocation.cs" />
-    <Compile Include="KeyValuePair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
