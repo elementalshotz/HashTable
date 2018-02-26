@@ -1,47 +1,140 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HashTable
 {
     class HashDictionary<K, V> : IDictionary<K, V>
     {
-        Dictionary<K, V> hashDictionary;
+        LinkedList<KeyValuePair<K, V>>[] hashDictionary;
+        int Size;
 
-        public HashDictionary() => hashDictionary = new Dictionary<K, V>();
-
-        IEnumerator IEnumerable.GetEnumerator() => (IEnumerator)hashDictionary.GetEnumerator();
-
-        public void Add(System.Collections.Generic.KeyValuePair<K, V> item) => hashDictionary.Add(item.Key, item.Value);
-
-        public void Clear() => hashDictionary.Clear();
-
-        public bool Contains(System.Collections.Generic.KeyValuePair<K, V> item) => hashDictionary.Contains(item);
-
-        public void CopyTo(System.Collections.Generic.KeyValuePair<K, V>[] array, int arrayIndex)
+        public HashDictionary(int size)
         {
-            foreach (var item in hashDictionary)
+            hashDictionary = new LinkedList<KeyValuePair<K, V>>[size];
+            Size = size;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            KeyValuePair<K,V>[] items = new KeyValuePair<K,V>[Size];
+            CopyTo(items, 0);
+
+            return (IEnumerator) new HashDictionaryEnumerator(items);
+        }
+
+        public void Add(KeyValuePair<K, V> item)
+        {
+            int index = HashIndex(item.Key.GetHashCode());
+
+            hashDictionary[index].AddLast(new LinkedListNode<KeyValuePair<K, V>>(item));
+        }
+
+        public void Clear()
+        {
+            foreach (var linkedList in hashDictionary)
             {
-                array[arrayIndex] = item;
-                arrayIndex++;
+                linkedList.Clear();
             }
         }
 
-        public bool Remove(System.Collections.Generic.KeyValuePair<K, V> item) => hashDictionary.Remove(item.Key);
+        public bool Contains(KeyValuePair<K, V> item)
+        {
+            foreach (var linkedList in hashDictionary)
+            {
+                foreach (var listItem in linkedList)
+                {
+                    if (listItem.Key.Equals(item.Key))
+                        return true;
+                }
+            }
 
-        public int Count { get { return hashDictionary.Count; } }
+            return false;
+        }
+
+        public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
+        {
+            foreach (var linkedList in hashDictionary)
+            {
+                foreach (var item in linkedList)
+                {
+                    array[arrayIndex] = item;
+                    arrayIndex++;
+                }
+            }
+        }
+
+        public bool Remove(System.Collections.Generic.KeyValuePair<K, V> item)
+        {
+            if (Contains(item))
+            {
+                int index = HashIndex(item.Key.GetHashCode());
+                hashDictionary[index].Remove(new LinkedListNode<KeyValuePair<K, V>>(item));
+                return true;
+            }
+
+            return false;
+        }
+
+        public int Count { get { return hashDictionary.Length; } }
         public bool IsReadOnly { get; }
 
-        public bool ContainsKey(K key) => hashDictionary.ContainsKey(key);
+        public bool ContainsKey(K key)
+        {
+            foreach (var linkedList in hashDictionary)
+            {
+                foreach (var item in linkedList)
+                {
+                    if (item.Key.Equals(key))
+                    {
+                        return true;
+                    }
+                }
+            }
 
-        public void Add(K key, V value) => hashDictionary.Add(key, value);
+            return false;
+        }
 
-        public bool Remove(K key) => hashDictionary.Remove(key);
+        public void Add(K key, V value) => hashDictionary[HashIndex(key.GetHashCode())].AddLast(new LinkedListNode<KeyValuePair<K,V>>(new KeyValuePair<K, V>(key, value)));
 
-        public bool TryGetValue(K key, out V value) => hashDictionary.TryGetValue(key, out value);
+        public bool Remove(K key)
+        {
+            bool exists = ContainsKey(key);
+
+            if (exists)
+            {
+                foreach (var linkedList in hashDictionary)
+                {
+                    foreach (var item in linkedList)
+                    {
+                        if (item.Key.Equals(key))
+                        {
+                            hashDictionary[HashIndex(key.GetHashCode())].Remove(new LinkedListNode<KeyValuePair<K, V>>(item));
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool TryGetValue(K key, out V value)
+        {
+            foreach (var linkedList in hashDictionary)
+            {
+                foreach (var item in linkedList)
+                {
+                    if (item.Key.Equals(key))
+                    {
+                        value = item.Value;
+                        return true;
+                    }
+                }
+            }
+
+            throw new A
+        }
 
         public IEnumerator<System.Collections.Generic.KeyValuePair<K, V>> GetEnumerator() => hashDictionary.GetEnumerator();
 
@@ -53,5 +146,7 @@ namespace HashTable
 
         public ICollection<K> Keys { get; }
         public ICollection<V> Values { get; }
+
+        public int HashIndex(int hash) => hash % hashDictionary.Length;
     }
 }

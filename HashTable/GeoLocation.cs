@@ -27,7 +27,7 @@ namespace HashTable
             get => Long;
         }
 
-        public override int GetHashCode() => Tuple.Create(Long, Lat).GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         public override string ToString()
         {
