@@ -188,9 +188,13 @@ namespace HashTable
             }
             set
             {
-                V v;
-                TryGetValue(key, out v);
-                v = value;
+                if (ContainsKey(key))
+                {
+                    
+                } else
+                {
+                    Add(key, value);
+                }
             }
         }
 
