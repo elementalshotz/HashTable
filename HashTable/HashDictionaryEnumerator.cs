@@ -13,9 +13,9 @@ namespace HashTable
 
         private int position = -1;
 
-        public HashDictionaryEnumerator(KeyValuePair<K, V>[] list)
+        public HashDictionaryEnumerator(KeyValuePair<K, V>[] dictionary)
         {
-            listOfValuePairs = list;
+            listOfValuePairs = dictionary;
         }
 
         public void Dispose()
@@ -40,7 +40,7 @@ namespace HashTable
             {
                 try
                 {
-                    return listOfValuePairs[position];
+                    return listOfValuePairs.ElementAt(position);
                 }
                 catch (IndexOutOfRangeException)
                 {

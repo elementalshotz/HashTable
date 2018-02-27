@@ -14,15 +14,13 @@ namespace HashTable
         public HashDictionary(int size)
         {
             hashDictionary = new LinkedList<KeyValuePair<K, V>>[size];
+
             Size = size;
         }
 
         private int HashKey(K key) => Math.Abs(key.GetHashCode()) % this.Size;
 
-        IEnumerator IEnumerable.GetEnumerator() {
-
-            return this.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
         public V Find(K key)
         {
@@ -40,25 +38,15 @@ namespace HashTable
 
         public void Add(KeyValuePair<K, V> item)
         {
-            var hash = this.HashKey(item.Key);
-
-            var keyValuePair = new KeyValuePair<K, V>(item.Key,item.Value);
-
-            if (this.hashDictionary[hash] == null)
-            {
-                this.hashDictionary[hash] = new LinkedList<KeyValuePair<K, V>>();
-                this.hashDictionary[hash].AddFirst(keyValuePair);
-            }
-
-            this.hashDictionary[hash].AddLast(keyValuePair);
-            Count++;
+            Add(item.Key, item.Value);
         }
 
         public void Clear()
         {
             foreach (var linkedList in hashDictionary)
             {
-                linkedList.Clear();
+                if (linkedList != null)
+                    linkedList.Clear();
             }
         }
 
@@ -135,16 +123,14 @@ namespace HashTable
             {
                 this.hashDictionary[hash] = new LinkedList<KeyValuePair<K, V>>();
                 this.hashDictionary[hash].AddFirst(keyValuePair);
+                Count++;
+                return;
             }
 
             this.hashDictionary[hash].AddLast(keyValuePair);
             Count++;
 
         }
-
-        //=> hashDictionary[HashIndex(key.GetHashCode())].AddLast(new LinkedListNode<KeyValuePair<K,V>>(new KeyValuePair<K, V>(key, value)));
-
-
 
         public bool Remove(K key)
         {
@@ -154,11 +140,14 @@ namespace HashTable
             {
                 foreach (var linkedList in hashDictionary)
                 {
-                    foreach (var item in linkedList)
+                    if (linkedList != null)
                     {
-                        if (item.Key.Equals(key))
+                        foreach (var item in linkedList)
                         {
-                            hashDictionary[HashKey(key)].Remove(new LinkedListNode<KeyValuePair<K, V>>(item));
+                            if (item.Key.Equals(key))
+                            {
+                                hashDictionary[HashKey(key)].Remove(item);
+                            }
                         }
                     }
                 }
