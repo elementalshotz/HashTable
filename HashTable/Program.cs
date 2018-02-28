@@ -10,19 +10,19 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            var dictionary = new Dictionary<string, int>();
+            /*var dictionary = new Dictionary<string, int>();
             dictionary["hej"] = 3;
             dictionary["sol"] = 1;
-            dictionary["sol"]++;
+            dictionary["sol"]++;*/
 
             var dict = new HashDictionary<string, int>(3);
             dict["hej"] = 3;
             dict["sol"] = 1;
             dict["sol"]++;
 
-            Console.WriteLine(dictionary.Count);
+            Console.WriteLine(dict.Count);
 
-            foreach (var item in dictionary)
+            foreach (var item in dict)
             {
                 Console.WriteLine(item.Key + "\t" + item.Value);
             }

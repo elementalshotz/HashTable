@@ -190,7 +190,19 @@ namespace HashTable
             {
                 if (ContainsKey(key))
                 {
-                    
+                    var hash = HashKey(key);
+                    var collection = this.hashDictionary[hash];
+                    KeyValuePair<K,V> itemValueKey = new KeyValuePair<K, V>(key, value);
+
+                    for (int i = 0; i < collection.Count; i++)
+                    {
+                        if (collection.ElementAt(i).Key.Equals(key))
+                        {
+                            collection.Remove(collection.ElementAt(i));
+                        }
+                    }
+
+                    Add(itemValueKey);
                 } else
                 {
                     Add(key, value);
@@ -198,6 +210,7 @@ namespace HashTable
             }
         }
 
+        
         public ICollection<K> Keys { get; }
         public ICollection<V> Values { get; }
     }
