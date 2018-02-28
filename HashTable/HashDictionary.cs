@@ -48,6 +48,8 @@ namespace HashTable
                 if (linkedList != null)
                     linkedList.Clear();
             }
+
+            Count = 0;
         }
 
         public bool Contains(KeyValuePair<K, V> item)
@@ -199,6 +201,7 @@ namespace HashTable
                         if (collection.ElementAt(i).Key.Equals(key))
                         {
                             collection.Remove(collection.ElementAt(i));
+                            break;
                         }
                     }
 

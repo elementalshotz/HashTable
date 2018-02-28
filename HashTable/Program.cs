@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace HashTable
 {
@@ -10,24 +10,6 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            /*var dictionary = new Dictionary<string, int>();
-            dictionary["hej"] = 3;
-            dictionary["sol"] = 1;
-            dictionary["sol"]++;*/
-
-            var dict = new HashDictionary<string, int>(3);
-            dict["hej"] = 3;
-            dict["sol"] = 1;
-            dict["sol"]++;
-
-            Console.WriteLine(dict.Count);
-
-            foreach (var item in dict)
-            {
-                Console.WriteLine(item.Key + "\t" + item.Value);
-            }
-
-            return;
             string[] cities = System.IO.File.ReadAllLines("cities100000.txt");
             HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>(10007);
             KeyValuePair<GeoLocation<double>, City> key = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10,10), new City("Tjenarey", 10,10,500000));
@@ -60,9 +42,33 @@ namespace HashTable
             Console.WriteLine(hashDictionary.Find(key.Key));
             //Console.WriteLine(hashDictionary.Find(new GeoLocation<double>(101.05, 35.45)));
 
-            
-
             hashDictionary.Clear();
+
+            foreach (var city in cities)
+            {
+                string[] city_info = city.Split('\t');
+
+                hashDictionary[new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2]))] = new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]));
+            }
+
+            GeoLocation<double> location = new GeoLocation<double>(100.45123, 50.5648);
+            hashDictionary[location] = new City("Wat da hell", 100.45123, 50.5648, 500000);
+
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            foreach (var city in hashDictionary)
+            {
+                Console.WriteLine(city.Value.ToString());
+            }
+
+            Console.WriteLine(hashDictionary.Count);
+
+            Console.WriteLine(hashDictionary[location]);
+
+            hashDictionary[location] = new City("Wat da hell", 100.45123, 50.5648, 750000);
+
+            Console.WriteLine(hashDictionary[location]);
         }
     }
 }
