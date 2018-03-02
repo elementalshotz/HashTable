@@ -27,7 +27,7 @@ namespace HashTable
             get => Long;
         }
 
-        public override int GetHashCode() => (int)Math.Abs(Math.Pow(Double.Parse(Long.ToString()), Double.Parse(Lat.ToString())));
+        public override int GetHashCode() => Math.Abs(Math.Pow(Double.Parse(Long.ToString()), Double.Parse(Lat.ToString())).GetHashCode());
 
         public override string ToString()
         {

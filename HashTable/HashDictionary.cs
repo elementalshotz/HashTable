@@ -18,7 +18,7 @@ namespace HashTable
             Size = size;
         }
 
-        private int HashKey(K key) => Math.Abs(key.GetHashCode()) % this.Size;
+        private int HashKey(K key) => key.GetHashCode() % this.Size;
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
@@ -162,7 +162,7 @@ namespace HashTable
 
         public bool TryGetValue(K key, out V value)
         {
-            value = Find(key); // Vet ej vad som händer om funktionen inte hittar nyckeln.
+            TryGetValue(key, out value); // Vet ej vad som händer om funktionen inte hittar nyckeln.
             return true;
         }
 

@@ -21,7 +21,7 @@ namespace HashTable
             {
                 string[] city_info = city.Split('\t');
 
-                hashDictionary.Add(new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2])), new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]))));
+                hashDictionary.Add(new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(Double.Parse(city_info[1].ToString(), System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse(city_info[2].ToString(), System.Globalization.CultureInfo.CreateSpecificCulture("en-EN"))), new City(city_info[0], Double.Parse(city_info[1].ToString(), System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse(city_info[2].ToString(), System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), int.Parse(city_info[3].ToString()))));
             }
 
             hashDictionary.Add(key);
@@ -48,11 +48,11 @@ namespace HashTable
             {
                 string[] city_info = city.Split('\t');
 
-                hashDictionary[new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2]))] = new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]));
+                hashDictionary[new GeoLocation<double>(Double.Parse(city_info[1], System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse(city_info[2], System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")))] = new City(city_info[0], Double.Parse(city_info[1], System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse(city_info[2], System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), int.Parse(city_info[3]));
             }
 
             GeoLocation<double> location = new GeoLocation<double>(100.45123, 50.5648);
-            hashDictionary[location] = new City("Wat da hell", 100.45123, 50.5648, 500000);
+            hashDictionary[location] = new City("Wat da hell", Double.Parse("100.45123", System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse("50.5648", System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), 500000);
 
             Thread.Sleep(3000);
             Console.Clear();
@@ -64,9 +64,9 @@ namespace HashTable
 
             Console.WriteLine(hashDictionary.Count);
 
-            Console.WriteLine(hashDictionary[new GeoLocation<double>(100.45123, 50.5648)]);
+            Console.WriteLine(hashDictionary[new GeoLocation<double>(Double.Parse("100.45123", System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse("50.5648", System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")))]);
 
-            hashDictionary[location] = new City("Wat da hell", 100.45123, 50.5648, 750000);
+            hashDictionary[location] = new City("Wat da hell", Double.Parse("100.45123", System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), Double.Parse("50.5648", System.Globalization.CultureInfo.CreateSpecificCulture("en-EN")), 750000);
 
             Console.WriteLine(hashDictionary[location]);
         }
