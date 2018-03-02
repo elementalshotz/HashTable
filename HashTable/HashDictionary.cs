@@ -22,20 +22,6 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-        public V Find(K key)
-        {
-            var hash = this.HashKey(key);
-
-            if (this.hashDictionary[hash] == null)
-            {
-                return default(V);
-            }
-
-            var collection = this.hashDictionary[hash];
-
-            return collection.First(item => item.Key.Equals(key)).Value;
-        }
-
         public void Add(KeyValuePair<K, V> item)
         {
             Add(item.Key, item.Value);
@@ -95,9 +81,6 @@ namespace HashTable
         }
 
         public int Count { get; private set; }
-
-
-
         public bool IsReadOnly { get; }
 
         public bool ContainsKey(K key)
@@ -162,8 +145,27 @@ namespace HashTable
 
         public bool TryGetValue(K key, out V value)
         {
-            value = Find(key); // Vet ej vad som händer om funktionen inte hittar nyckeln.
-            return true;
+            var hash = this.HashKey(key);
+
+            if (this.hashDictionary[hash] == null)
+            {
+                value = default(V);
+                return false;
+            }
+
+            var collection = this.hashDictionary[hash];
+
+            foreach (var item in collection)
+            {
+                if (item.Key.Equals(key))
+                {
+                    value = item.Value;
+                    return true;
+                }
+            }
+
+            value = default(V);
+            return false;
         }
 
         public IEnumerator<KeyValuePair<K, V>> GetEnumerator()

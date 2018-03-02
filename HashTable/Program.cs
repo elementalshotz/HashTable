@@ -39,7 +39,8 @@ namespace HashTable
             Console.WriteLine("Count: " + hashDictionary.Count);
             Console.WriteLine(hashDictionary.Contains(key));
 
-            Console.WriteLine(hashDictionary.Find(key.Key));
+            City city1;
+            Console.WriteLine(hashDictionary.TryGetValue(key.Key, out city1));
             //Console.WriteLine(hashDictionary.Find(new GeoLocation<double>(101.05, 35.45)));
 
             hashDictionary.Clear();
