@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    class GeoLocation
+    class GeoLocation<K>
     {
-        private double Long;
-        private double Lat;
+        private K Long;
+        private K Lat;
 
-        public GeoLocation(double longitude, double latitude)
+        public GeoLocation(K longitude, K latitude)
         {
             this.Long = longitude;
             this.Lat = latitude;
         }
 
-        public double Latitude
+        public K Latitude
         {
             get => Lat;
         }
 
-        public double Longitude
+        public K Longitude
         {
             get => Long;
         }
 
-        public override int GetHashCode() => (int)Math.Abs(Math.Pow(Long, Lat));
+        public override int GetHashCode() => (int)Math.Abs(Math.Pow(Double.Parse(Long.ToString()), Double.Parse(Lat.ToString())));
 
         public override string ToString()
         {

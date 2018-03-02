@@ -11,17 +11,17 @@ namespace HashTable
         static void Main(string[] args)
         {
             string[] cities = System.IO.File.ReadAllLines("cities100000.txt");
-            HashDictionary<GeoLocation, City> hashDictionary = new HashDictionary<GeoLocation, City>(10007);
-            KeyValuePair<GeoLocation, City> key = new KeyValuePair<GeoLocation, City>(new GeoLocation(10,10), new City("Tjenarey", 10,10,500000));
-            KeyValuePair<GeoLocation, City> valuePair = new KeyValuePair<GeoLocation, City>(new GeoLocation(10, 10), new City("Hejsan", 10.503287498, 20.324453168413547355465138541354653, 500000));
-            KeyValuePair<GeoLocation, City> keyValue = new KeyValuePair<GeoLocation, City>(new GeoLocation(10, 10), new City("Svensson", 115, 10, 500000));
-            KeyValuePair<GeoLocation, City> valueKey = new KeyValuePair<GeoLocation, City>(new GeoLocation(10, 10), new City("Lundsson", 20, -115, 500000));
+            HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>(10007);
+            KeyValuePair<GeoLocation<double>, City> key = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10,10), new City("Tjenarey", 10,10,500000));
+            KeyValuePair<GeoLocation<double>, City> valuePair = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10, 10), new City("Hejsan", 10.503287498, 20.324453168413547355465138541354653, 500000));
+            KeyValuePair<GeoLocation<double>, City> keyValue = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10, 10), new City("Svensson", 115, 10, 500000));
+            KeyValuePair<GeoLocation<double>, City> valueKey = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10, 10), new City("Lundsson", 20, -115, 500000));
 
             foreach (var city in cities)
             {
                 string[] city_info = city.Split('\t');
 
-                hashDictionary.Add(new KeyValuePair<GeoLocation, City>(new GeoLocation(Double.Parse(city_info[1]), Double.Parse(city_info[2])), new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]))));
+                hashDictionary.Add(new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2])), new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]))));
             }
 
             hashDictionary.Add(key);
@@ -48,10 +48,10 @@ namespace HashTable
             {
                 string[] city_info = city.Split('\t');
 
-                hashDictionary[new GeoLocation(Double.Parse(city_info[1]), Double.Parse(city_info[2]))] = new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]));
+                hashDictionary[new GeoLocation<double>(Double.Parse(city_info[1]), Double.Parse(city_info[2]))] = new City(city_info[0], Double.Parse(city_info[1]), Double.Parse(city_info[2]), int.Parse(city_info[3]));
             }
 
-            GeoLocation location = new GeoLocation(100.45123, 50.5648);
+            GeoLocation<double> location = new GeoLocation<double>(100.45123, 50.5648);
             hashDictionary[location] = new City("Wat da hell", 100.45123, 50.5648, 500000);
 
             Thread.Sleep(3000);
@@ -64,7 +64,7 @@ namespace HashTable
 
             Console.WriteLine(hashDictionary.Count);
 
-            Console.WriteLine(hashDictionary[new GeoLocation(100.45123, 50.5648)]);
+            Console.WriteLine(hashDictionary[new GeoLocation<double>(100.45123, 50.5648)]);
 
             hashDictionary[location] = new City("Wat da hell", 100.45123, 50.5648, 750000);
 
