@@ -9,13 +9,13 @@ namespace HashTable
     class City
     {
         private string Name;
-        private GeoLocation<double> location;
+        private GeoLocation location;
         private int Population;
 
         public City(string name, double longitude, double latitude, int population)
         {
             Name = name;
-            location = new GeoLocation<double>(longitude, latitude);
+            location = new GeoLocation(longitude, latitude);
             Population = population;
         }
 
