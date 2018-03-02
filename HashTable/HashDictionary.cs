@@ -162,7 +162,7 @@ namespace HashTable
 
         public bool TryGetValue(K key, out V value)
         {
-            TryGetValue(key, out value); // Vet ej vad som händer om funktionen inte hittar nyckeln.
+            value = Find(key); // Vet ej vad som händer om funktionen inte hittar nyckeln.
             return true;
         }
 
