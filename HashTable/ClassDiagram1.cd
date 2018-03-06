@@ -3,7 +3,7 @@
   <Class Name="HashTable.City" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAMgAAAAAQCAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAACIAABAAAMgAAAAAQCAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>City.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,7 +17,7 @@
   <Class Name="HashTable.HashDictionary&lt;K, V&gt;" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAIAAAAAAAAEgBAQCAAABAQAAAAIAAAEAAQgAIBQIAA=</HashCode>
+      <HashCode>CAIAAAAAAAAEgBAQCAAABAQAAAAAAAAEAAQgAIBQIAA=</HashCode>
       <FileName>HashDictionary.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
