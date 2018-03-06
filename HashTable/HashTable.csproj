@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="City.cs" />
     <Compile Include="HashDictionary.cs" />
-    <Compile Include="HashDictionaryEnumerator.cs" />
     <Compile Include="HashTable.cs" />
     <Compile Include="GeoLocation.cs" />
     <Compile Include="Program.cs" />
