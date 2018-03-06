@@ -28,5 +28,23 @@ namespace HashTable
         {
             return $"Name: {Name} \t Longitude: {location.Longitude} \t Latitude: {location.Latitude} \t Population: {Population}";
         }
+
+        public string CityName
+        {
+            get => Name;
+            set => Name = value;
+        }
+
+        public GeoLocation<double> GeoLocation
+        {
+            get => location;
+            set => location = value;
+        }
+
+        public int CityPopulation
+        {
+            get => Population;
+            set => Population = value;
+        }
     }
 }
