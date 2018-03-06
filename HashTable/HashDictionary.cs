@@ -48,7 +48,7 @@ namespace HashTable
             }
 
             var collection = this.hashDictionary[hash];
-
+           
             return collection.Any(pair => pair.Key.Equals(item.Key));
 
         }
@@ -76,8 +76,16 @@ namespace HashTable
 
             var collection = this.hashDictionary[hash];
 
-            return collection.Any(pair => pair.Key.Equals(item.Key));
+            foreach (var cityPair in collection)
+            {
+                if (cityPair.Key.Equals(item.Key))
+                {
+                    hashDictionary[hash].Remove(cityPair);
+                    return true;
+                }
+            }
 
+            return false;
         }
 
         public int Count { get; private set; }
