@@ -55,11 +55,9 @@ namespace HashTable
 
         public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
         {
-            var enumerator = GetEnumerator();
-
-            while (enumerator.MoveNext())
+            foreach (var e in this)
             {
-                array[arrayIndex++] = enumerator.Current;
+                array[arrayIndex++] = e;
             }
         }
 
@@ -222,15 +220,9 @@ namespace HashTable
             {
                 ICollection<K> Ks = new List<K>();
 
-                foreach (var linked in hashDictionary)
+                foreach (var item in this)
                 {
-                    if (linked != null)
-                    {
-                        foreach (var item in linked)
-                        {
-                            Ks.Add(item.Key);
-                        }
-                    }
+                    Ks.Add(item.Key);
                 }
 
                 return Ks;
@@ -243,15 +235,9 @@ namespace HashTable
             {
                 ICollection<V> Vs = new List<V>();
 
-                foreach (var linked in hashDictionary)
+                foreach (var item in this)
                 {
-                    if (linked != null)
-                    {
-                        foreach (var item in linked)
-                        {
-                            Vs.Add(item.Value);
-                        }
-                    }
+                    Vs.Add(item.Value);
                 }
 
                 return Vs;

@@ -57,6 +57,11 @@ namespace HashTable
 
             Console.WriteLine(ctx[0].Value.ToString());
 
+            List<GeoLocation<double>> locations = new List<GeoLocation<double>>();
+            locations = (List<GeoLocation<double>>)hashDictionary.Keys;
+
+            Console.WriteLine(locations[0]);
+
             hashDictionary.Clear();
 
             foreach (var city in cities)
