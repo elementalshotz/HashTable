@@ -11,7 +11,7 @@ namespace HashTable
         static void Main(string[] args)
         {
             string[] cities = System.IO.File.ReadAllLines("cities100000.txt");
-            HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>(10007);
+            HashDictionary<GeoLocation<double>, City> hashDictionary = new HashDictionary<GeoLocation<double>, City>(50);
             KeyValuePair<GeoLocation<double>, City> key = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10,10), new City("Tjenarey", 10,10,500000));
             KeyValuePair<GeoLocation<double>, City> valuePair = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(10.5032, 20.3244), new City("Hejsan", 10.5032, 20.3244, 500000));
             KeyValuePair<GeoLocation<double>, City> keyValue = new KeyValuePair<GeoLocation<double>, City>(new GeoLocation<double>(115, 10), new City("Svensson", 115, 10, 500000));
@@ -51,6 +51,11 @@ namespace HashTable
             City city1;
             Console.WriteLine(hashDictionary.TryGetValue(key.Key, out city1));
             //Console.WriteLine(hashDictionary.Find(new GeoLocation<double>(101.05, 35.45)));
+
+            KeyValuePair<GeoLocation<double>, City>[] ctx = new KeyValuePair<GeoLocation<double>, City>[hashDictionary.Count];
+            hashDictionary.CopyTo(ctx, 0);
+
+            Console.WriteLine(ctx[0].Value.ToString());
 
             hashDictionary.Clear();
 

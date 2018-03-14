@@ -55,13 +55,11 @@ namespace HashTable
 
         public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
         {
-            foreach (var linkedList in hashDictionary)
+            var enumerator = GetEnumerator();
+
+            while (enumerator.MoveNext())
             {
-                foreach (var item in linkedList)
-                {
-                    array[arrayIndex] = item;
-                    arrayIndex++;
-                }
+                array[arrayIndex++] = enumerator.Current;
             }
         }
 
@@ -89,7 +87,7 @@ namespace HashTable
         }
 
         public int Count { get; private set; }
-        public bool IsReadOnly { get; }
+        public bool IsReadOnly => false;
 
         public bool ContainsKey(K key)
         {
@@ -108,6 +106,9 @@ namespace HashTable
 
         public void Add(K key, V value)
         {
+            if (key == null)
+                throw new ArgumentNullException();
+            
             var hash = this.HashKey(key);
 
             var keyValuePair = new KeyValuePair<K, V>(key, value);
@@ -119,6 +120,9 @@ namespace HashTable
                 Count++;
                 return;
             }
+
+            if (Contains(keyValuePair))
+                throw new ArgumentException();
 
             this.hashDictionary[hash].AddLast(keyValuePair);
             Count++;
@@ -140,12 +144,13 @@ namespace HashTable
                             if (item.Key.Equals(key))
                             {
                                 hashDictionary[HashKey(key)].Remove(item);
+                                return true;
                             }
                         }
                     }
                 }
 
-                return true;
+                return false;
             }
 
             return false;
@@ -211,8 +216,46 @@ namespace HashTable
             }
         }
 
-        
-        public ICollection<K> Keys { get; }
-        public ICollection<V> Values { get; }
+        public ICollection<K> Keys
+        {
+            get
+            {
+                ICollection<K> Ks = new List<K>();
+
+                foreach (var linked in hashDictionary)
+                {
+                    if (linked != null)
+                    {
+                        foreach (var item in linked)
+                        {
+                            Ks.Add(item.Key);
+                        }
+                    }
+                }
+
+                return Ks;
+            }
+        }
+
+        public ICollection<V> Values
+        {
+            get
+            {
+                ICollection<V> Vs = new List<V>();
+
+                foreach (var linked in hashDictionary)
+                {
+                    if (linked != null)
+                    {
+                        foreach (var item in linked)
+                        {
+                            Vs.Add(item.Value);
+                        }
+                    }
+                }
+
+                return Vs;
+            }
+        }
     }
 }
